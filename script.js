@@ -231,6 +231,9 @@ function showPlanetInfo(num) {
     quizContainer.classList.add('hiding');
     planetInfoCard.classList.remove('hiding');
     infoActions.style.display = 'block';
+
+    // Store the current planet index for the quiz
+    currentQuizPlanetIndex = num;
 }
 
 function goBack() {
@@ -247,9 +250,7 @@ function startQuiz() {
     submitButton.style.display = 'block';
     scoreText.innerText = 'Score: 0 / 5';
 
-    const planetName = planetInfoTitle.innerText.toLowerCase();
-    currentQuizPlanetIndex = names.indexOf(planetName);
-
+    // The currentQuizPlanetIndex is already set by showPlanetInfo()
     loadQuestion();
 }
 
@@ -259,7 +260,7 @@ function closeQuiz() {
 }
 
 function loadQuestion() {
-    if (currentQuestionIndex < quizData[currentQuizPlanetIndex].length) {
+    if (currentQuizPlanetIndex > -1 && currentQuestionIndex < quizData[currentQuizPlanetIndex].length) {
         const questionData = quizData[currentQuizPlanetIndex][currentQuestionIndex];
         quizTitle.innerText = `Quiz: ${capitaliseFirstLetter(names[currentQuizPlanetIndex])}`;
         quizQuestion.innerText = questionData.question;
