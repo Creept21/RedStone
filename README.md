@@ -1,2 +1,2 @@
-# HackBattle-25
+# Red Stone
 HackBattle hackathon 2025 (The Passive Active Knowledge)
