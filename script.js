@@ -110,28 +110,35 @@ const quizData = [
 
 loadSavedData();
 
+// UPDATED: This function now passes the value to setupSpeedsOfPlanets
 function getInputOfSpeed(item) {
     var slideValue = item.value;
     localStorage.setItem('speed', item.value);
-    for(var i = 0; i < names.length; i++) {
-        var nameOfItem = '--' + names[i] + 'Speed';
-        var value = slideValue * speeds[i];
-        var value = value + 's';
-        document.querySelector('body').style.setProperty(nameOfItem, value);
-    }
+    // Pass the slider value to the main speed function
+    setupSpeedsOfPlanets(slideValue);
 }
 
+// UPDATED: This function now contains all the logic for setting speeds and reversing the slider effect
 function setupSpeedsOfPlanets(item) {
-    var slideValue = item;
-    if (item > 500) {
-        sliderContainer.value = "500";
+    var slideValue = parseInt(item); // Ensure it's a number
+    var calculationValue;
+
+    // Values from the slider (10-500) need to be inverted for the speed calculation.
+    // A high slider value (e.g., 500) should result in a low calculation value (e.g., 10) for a fast speed.
+    if (slideValue <= 500) {
+        sliderContainer.value = slideValue;
+        // Invert the value: (max + min) - current value
+        calculationValue = (500 + 10) - slideValue;
     } else {
-        sliderContainer.value = item;
+        // Handles the 'realtime' case which uses a very large number, so no inversion is needed.
+        calculationValue = slideValue;
+        sliderContainer.value = "500"; // Visually max out the slider for realtime
     }
-    for(var i = 0; i < names.length; i++) {
+
+    for (var i = 0; i < names.length; i++) {
         var nameOfItem = '--' + names[i] + 'Speed';
-        var value = slideValue * speeds[i];
-        var value = value + 's';
+        var value = calculationValue * speeds[i];
+        value = value + 's';
         document.querySelector('body').style.setProperty(nameOfItem, value);
     }
 }
