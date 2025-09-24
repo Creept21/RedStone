@@ -653,7 +653,7 @@ a:hover::after {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* This keeps the card container to the right */
     align-items: center;
     z-index: 500;
     transition: opacity 0.5s ease-in-out;
@@ -661,9 +661,68 @@ a:hover::after {
     background-position: center;
 }
 
+/* === NEW Large Solar System Styles Start === */
+.info-page-solar-system {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 50%; /* Takes up the left half of the screen */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 501;
+}
+
+.info-page-star, .info-page-planet {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.info-page-sun {
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(ellipse at center, #ffd700 0%, #ff8c00 100%);
+    box-shadow: 0 0 25px #ff8c00;
+}
+
+.info-page-mercury { width: 4px; height: 4px; background-color: #9f9f9f; animation: info-page-mercury-anim var(--mercurySpeed) linear infinite; }
+.info-page-venus   { width: 8px; height: 8px; background-color: #e6a876; animation: info-page-venus-anim var(--venusSpeed) linear infinite; }
+.info-page-earth   { width: 8px; height: 8px; background-color: #6b93d6; animation: info-page-earth-anim var(--earthSpeed) linear infinite; }
+.info-page-mars    { width: 6px; height: 6px; background-color: #c1440e; animation: info-page-mars-anim var(--marsSpeed) linear infinite; }
+.info-page-jupiter { width: 16px; height: 16px; background-color: #d8ca9d; animation: info-page-jupiter-anim var(--jupiterSpeed) linear infinite; }
+.info-page-saturn  { width: 14px; height: 14px; background-color: #e3dccb; animation: info-page-saturn-anim var(--saturnSpeed) linear infinite; }
+.info-page-uranus  { width: 12px; height: 12px; background-color: #afdbf5; animation: info-page-uranus-anim var(--uranusSpeed) linear infinite; }
+.info-page-neptune { width: 12px; height: 12px; background-color: #5b5ddf; animation: info-page-neptune-anim var(--neptuneSpeed) linear infinite; }
+
+.info-page-saturn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(30deg);
+    width: 150%;
+    height: 150%;
+    border: 2px solid #e3dccb;
+    border-radius: 50%;
+    border-left-color: transparent;
+    border-right-color: transparent;
+}
+
+@keyframes info-page-mercury-anim { from { transform: rotate(0deg) translateX(60px); } to { transform: rotate(360deg) translateX(60px); } }
+@keyframes info-page-venus-anim   { from { transform: rotate(0deg) translateX(90px); } to { transform: rotate(360deg) translateX(90px); } }
+@keyframes info-page-earth-anim   { from { transform: rotate(0deg) translateX(125px); } to { transform: rotate(360deg) translateX(125px); } }
+@keyframes info-page-mars-anim    { from { transform: rotate(0deg) translateX(160px); } to { transform: rotate(360deg) translateX(160px); } }
+@keyframes info-page-jupiter-anim { from { transform: rotate(0deg) translateX(200px); } to { transform: rotate(360deg) translateX(200px); } }
+@keyframes info-page-saturn-anim  { from { transform: rotate(0deg) translateX(250px); } to { transform: rotate(360deg) translateX(250px); } }
+@keyframes info-page-uranus-anim  { from { transform: rotate(0deg) translateX(300px); } to { transform: rotate(360deg) translateX(300px); } }
+@keyframes info-page-neptune-anim { from { transform: rotate(0deg) translateX(340px); } to { transform: rotate(360deg) translateX(340px); } }
+
+/* === END Large Solar System Styles === */
+
 .planet-info-card-container {
     position: relative;
-    width: 50%;
+    width: 50%; /* Takes up the right half of the screen */
     max-width: 800px;
     height: 80%;
     display: flex;
@@ -686,7 +745,7 @@ a:hover::after {
 }
 
 .planet-image-placeholder {
-    width: 40%;
+    width: 50%; /* UPDATED */
     height: 100%;
     background-size: contain;
     background-repeat: no-repeat;
@@ -694,7 +753,7 @@ a:hover::after {
 }
 
 .planet-info-details {
-    width: 60%;
+    width: 50%; /* UPDATED */
     padding-left: 2rem;
     display: flex;
     flex-direction: column;
@@ -796,4 +855,5 @@ a:hover::after {
     position: absolute;
     top: 20px;
     left: 20px;
+    z-index: 502; /* FIXED: Ensures button is clickable */
 }
