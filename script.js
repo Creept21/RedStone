@@ -37,14 +37,14 @@ const text = [
 ];
 
 const planetImages = [
-    'https://placehold.co/1920x1080/4F4C47/FFFFFF?text=Mercury',
-    'https://placehold.co/1920x1080/D86900/FFFFFF?text=Venus',
-    'https://placehold.co/1920x1080/284A86/FFFFFF?text=Earth',
-    'https://placehold.co/1920x1080/963D3D/FFFFFF?text=Mars',
-    'https://placehold.co/1920x1080/C67E7E/FFFFFF?text=Jupiter',
-    'https://placehold.co/1920x1080/D5AA6D/FFFFFF?text=Saturn',
-    'https://placehold.co/1920x1080/54A0C7/FFFFFF?text=Uranus',
-    'https://placehold.co/1920x1080/3D6B8F/FFFFFF?text=Neptune'
+    'assets/mercuryImage.jpg',
+    'assets/venusImage.jpg',
+    'assets/earthImage.jpg',
+    'assets/marsImage.jpg',
+    'assets/jupiterImage.jpeg',
+    'assets/saturnImage.jpg',
+    'assets/uranusImage.jpg',
+    'assets/neptuneImage.jpg'
 ];
 
 const speeds = [0.02, 0.051428, 0.08348, 0.157, 1.00112, 2.41942, 7.008, 13.765714];
@@ -274,14 +274,39 @@ function loadQuestion() {
 function submitAnswer() {
     const selectedOption = document.querySelector('input[name="quiz-option"]:checked');
     if (selectedOption) {
+        submitButton.disabled = true; // Disable button to prevent multiple submissions
         const userAnswer = selectedOption.value;
         const correctAnswer = quizData[currentQuizPlanetIndex][currentQuestionIndex].answer;
+        const allOptions = document.querySelectorAll('.quiz-option-label');
+
+        allOptions.forEach(optionLabel => {
+            const optionValue = optionLabel.querySelector('.quiz-option-input').value;
+            if (optionValue === correctAnswer) {
+                optionLabel.style.backgroundColor = '#4CAF50'; // Green for correct answer
+                optionLabel.querySelector('.quiz-option-text').style.color = 'white';
+            } else if (optionValue === userAnswer) {
+                optionLabel.style.backgroundColor = '#F44336'; // Red for incorrect answer
+                optionLabel.querySelector('.quiz-option-text').style.color = 'white';
+            }
+        });
+
         if (userAnswer === correctAnswer) {
             quizScore++;
         }
-        currentQuestionIndex++;
-        scoreText.innerText = `Score: ${quizScore} / 5`;
-        loadQuestion();
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            scoreText.innerText = `Score: ${quizScore} / 5`;
+            
+            // Reset colors and re-enable button
+            allOptions.forEach(optionLabel => {
+                optionLabel.style.backgroundColor = '';
+                optionLabel.querySelector('.quiz-option-text').style.color = '';
+            });
+            submitButton.disabled = false;
+            
+            loadQuestion();
+        }, 1500); // 1.5 second delay before loading next question
     }
 }
 
