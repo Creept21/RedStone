@@ -36,6 +36,7 @@ const text = [
     'Orbit speed: 5.4 km/s \n Diameter: 49,528 km \n Orbital period: 59,800 days \n \n Neptune is the furthest planet from our sun. It is also the coldest of all the planets and is made up mostly of a mixture of gases.'
 ];
 
+// Image paths are preserved as requested.
 const planetImages = [
     'assets/mercuryImage.jpg',
     'assets/venusImage.jpg',
@@ -110,7 +111,7 @@ const quizData = [
 
 loadSavedData();
 
-// UPDATED: This function now passes the value to setupSpeedsOfPlanets
+// This function now passes the value to setupSpeedsOfPlanets
 function getInputOfSpeed(item) {
     var slideValue = item.value;
     localStorage.setItem('speed', item.value);
@@ -118,21 +119,26 @@ function getInputOfSpeed(item) {
     setupSpeedsOfPlanets(slideValue);
 }
 
-// UPDATED: This function now contains all the logic for setting speeds and reversing the slider effect
+// UPDATED: This function contains the new logic for calculating speeds.
 function setupSpeedsOfPlanets(item) {
     var slideValue = parseInt(item); // Ensure it's a number
     var calculationValue;
 
-    // Values from the slider (10-500) need to be inverted for the speed calculation.
-    // A high slider value (e.g., 500) should result in a low calculation value (e.g., 10) for a fast speed.
-    if (slideValue <= 500) {
-        sliderContainer.value = slideValue;
-        // Invert the value: (max + min) - current value
-        calculationValue = (500 + 10) - slideValue;
-    } else {
-        // Handles the 'realtime' case which uses a very large number, so no inversion is needed.
+    // 'realtime' button passes a very large number.
+    if (slideValue > 500) {
         calculationValue = slideValue;
-        sliderContainer.value = "500"; // Visually max out the slider for realtime
+        // Set slider to the slowest visual position when in realtime mode
+        sliderContainer.value = "0";
+    } else {
+        sliderContainer.value = slideValue;
+        // Invert and scale the slider value.
+        // A low slideValue (0) results in a very high calculationValue (slow speed).
+        // A high slideValue (500) results in a low calculationValue (fast speed).
+        if (slideValue === 0) {
+            calculationValue = 200000; // A very large number for "almost zero" speed
+        } else {
+            calculationValue = 10000 / slideValue;
+        }
     }
 
     for (var i = 0; i < names.length; i++) {
@@ -142,6 +148,7 @@ function setupSpeedsOfPlanets(item) {
         document.querySelector('body').style.setProperty(nameOfItem, value);
     }
 }
+
 
 function loadSavedData() {
     var data = localStorage.getItem('speed');
