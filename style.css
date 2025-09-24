@@ -336,6 +336,7 @@ a:hover::after {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
     -ms-user-select: none;
+    padding: 8px 12px;
 }
 
 .options-button:hover, .quiz-button:hover, .submit-button:hover, .close-quiz-button:hover, .back-button:hover {
@@ -621,6 +622,7 @@ a:hover::after {
     -webkit-user-select: none;
     -webkit-touch-callout: none;
     -ms-user-select: none;
+    cursor: pointer;
 }
 
 .info-item:hover {
@@ -686,14 +688,16 @@ a:hover::after {
     box-shadow: 0 0 25px #ff8c00;
 }
 
-.info-page-mercury { width: 4px; height: 4px; background-color: #9f9f9f; animation: info-page-mercury-anim var(--mercurySpeed) linear infinite; }
-.info-page-venus   { width: 8px; height: 8px; background-color: #e6a876; animation: info-page-venus-anim var(--venusSpeed) linear infinite; }
-.info-page-earth   { width: 8px; height: 8px; background-color: #6b93d6; animation: info-page-earth-anim var(--earthSpeed) linear infinite; }
-.info-page-mars    { width: 6px; height: 6px; background-color: #c1440e; animation: info-page-mars-anim var(--marsSpeed) linear infinite; }
-.info-page-jupiter { width: 16px; height: 16px; background-color: #d8ca9d; animation: info-page-jupiter-anim var(--jupiterSpeed) linear infinite; }
-.info-page-saturn  { width: 14px; height: 14px; background-color: #e3dccb; animation: info-page-saturn-anim var(--saturnSpeed) linear infinite; }
-.info-page-uranus  { width: 12px; height: 12px; background-color: #afdbf5; animation: info-page-uranus-anim var(--uranusSpeed) linear infinite; }
-.info-page-neptune { width: 12px; height: 12px; background-color: #5b5ddf; animation: info-page-neptune-anim var(--neptuneSpeed) linear infinite; }
+/* Updated animation durations to be faster for the mini solar system */
+.info-page-mercury { width: 4px; height: 4px; background-color: #9f9f9f; animation: info-page-mercury-anim calc(var(--mercurySpeed) / 4) linear infinite; }
+.info-page-venus   { width: 8px; height: 8px; background-color: #e6a876; animation: info-page-venus-anim calc(var(--venusSpeed) / 4) linear infinite; }
+.info-page-earth   { width: 8px; height: 8px; background-color: #6b93d6; animation: info-page-earth-anim calc(var(--earthSpeed) / 4) linear infinite; }
+.info-page-mars    { width: 6px; height: 6px; background-color: #c1440e; animation: info-page-mars-anim calc(var(--marsSpeed) / 4) linear infinite; }
+.info-page-jupiter { width: 16px; height: 16px; background-color: #d8ca9d; animation: info-page-jupiter-anim calc(var(--jupiterSpeed) / 4) linear infinite; }
+.info-page-saturn  { width: 14px; height: 14px; background-color: #e3dccb; animation: info-page-saturn-anim calc(var(--saturnSpeed) / 4) linear infinite; }
+.info-page-uranus  { width: 12px; height: 12px; background-color: #afdbf5; animation: info-page-uranus-anim calc(var(--uranusSpeed) / 4) linear infinite; }
+.info-page-neptune { width: 12px; height: 12px; background-color: #5b5ddf; animation: info-page-neptune-anim calc(var(--neptuneSpeed) / 4) linear infinite; }
+
 
 .info-page-saturn::after {
     content: '';
