@@ -1,87 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Solar System</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="main-container">
-        <div class="solar-system">
-            <div class="sun"></div>
-            <div class="orbit" id="mercury-orbit">
-                <div class="planet" id="mercury"></div>
-            </div>
-            <div class="orbit" id="venus-orbit">
-                <div class="planet" id="venus"></div>
-            </div>
-            <div class="orbit" id="earth-orbit">
-                <div class="planet" id="earth"></div>
-            </div>
-            <div class="orbit" id="mars-orbit">
-                <div class="planet" id="mars"></div>
-            </div>
-            <div class="orbit" id="jupiter-orbit">
-                <div class="planet" id="jupiter"></div>
-            </div>
-            <div class="orbit" id="saturn-orbit">
-                <div class="planet" id="saturn"></div>
-            </div>
-            <div class="orbit" id="uranus-orbit">
-                <div class="planet" id="uranus"></div>
-            </div>
-            <div class="orbit" id="neptune-orbit">
-                <div class="planet" id="neptune"></div>
-            </div>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>The Solar System</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <script src="script.js" defer></script>
+
+      <img class="background-image" src="NightSky.jpeg" draggable="false">
+
+      <div class="header-container">
+        <h1 class="main-heading">Solar System</h1>
+
+        <h2 class="credits">By <a href="https://github.com/Creept21/RedStone" target="01Blank">Team RedStone</a></h2>
+      </div>
+    
+      <div class="star sun"></div>
+      <div class="mercury planet"></div>
+      <div class="venus planet"></div>
+      <div class="earth planet">
+        <div class="moon planet"></div>
+      </div>
+      <div class="mars planet"></div>
+      <div class="jupiter planet"></div>
+      <div class="saturn planet"></div>
+      <div class="uranus planet"></div>
+      <div class="neptune planet"></div>
+
+      <ul id="orbit-container" class="hiding">
+        <li class="mercury-orbit orbit-path"></li>
+        <li class="venus-orbit orbit-path"></li>
+        <li class="earth-orbit orbit-path"></li>
+        <li class="mars-orbit orbit-path"></li>
+        <li class="jupiter-orbit orbit-path"></li>
+        <li class="saturn-orbit orbit-path"></li>
+        <li class="uranus-orbit orbit-path"></li>
+        <li class="neptune-orbit orbit-path"></li>
+      </ul>
+
+    <div class="options" id="options">
+      <h1 class="options-title" id="options-title">Options</h1>
+
+        <div class="spacing" id="space"></div>
+
+      <h2 class="label" title="760320 times quicker than usual">Speed</h2>
+
+        <div class="slider-container" id="slider-container">
+          <input type="range" max="500" min="10" step="1" value="500" id="speed" class="slider" oninput="getInputOfSpeed(this)">
         </div>
 
-        <div class="controls">
-            <div class="control-group">
-                <label for="speed-slider">Time-Lapse Speed:</label>
-                <input type="range" id="speed-slider" min="0.1" max="5" value="1" step="0.1">
-            </div>
-            <div class="control-group">
-                <button id="toggle-orbits-btn">Toggle Orbits</button>
-                <button id="size-compare-btn">Compare Sizes</button>
-            </div>
-        </div>
-    </div>
-    
-    <div class="quiz-container hidden" id="quiz-container">
-        <div class="quiz-content">
-            <h2 id="quiz-question"></h2>
-            <div class="quiz-options" id="quiz-options">
-                <button class="quiz-option-btn"></button>
-                <button class="quiz-option-btn"></button>
-                <button class="quiz-option-btn"></button>
-                <button class="quiz-option-btn"></button>
-            </div>
-            <button id="close-quiz-btn">Close</button>
-        </div>
+          <br>
+
+        <h2 class="label">Show Orbits</h2>
+
+        <input type="checkbox" class="checkbox" id="checkbox" onclick="saveCheckState()">
+
+          <br>
+
+        <button class="options-button" id="options-button" onclick="setupSpeedsOfPlanets(380160000)">Default to realtime</button>
+
+          <br>
+
+        <button class="options-button" id="reset" onclick="resetData()">Reset</button>
     </div>
 
-    <div class="size-compare-container hidden" id="size-compare-container">
-        <button id="back-to-orbits-btn">Back to Orbits</button>
-        <div class="planet-row" id="planet-row">
-            </div>
-    </div>
-    
-    <div id="score-popup" class="feedback-popup hidden">
-        <div class="feedback-content">
-            <h2 id="final-score-msg"></h2>
-            <p id="score-details"></p>
-            <button id="score-close-btn">Close</button>
-        </div>
-    </div>
 
-    <div id="feedback-popup" class="feedback-popup hidden">
-        <div class="feedback-content">
-            <h2 id="feedback-message"></h2>
-            <button id="feedback-close-btn">OK</button>
-        </div>
-    </div>
     
-    <script src="script.js"></script>
-</body>
+      <ul class="info-container" id="info-container">
+        <button class="info-item" id="button1" onclick="showUserInfo(0)">Mercury</button>
+        <button class="info-item" id="button2" onclick="showUserInfo(1)">Venus</button>
+        <button class="info-item" id="button3" onclick="showUserInfo(2)">Earth</button>
+        <button class="info-item" id="button4" onclick="showUserInfo(3)">Mars</button>
+        <button class="info-item" id="button5" onclick="showUserInfo(4)">Jupiter</button>
+        <button class="info-item" id="button6" onclick="showUserInfo(5)">Saturn</button>
+        <button class="info-item" id="button7" onclick="showUserInfo(6)">Uranus</button>
+        <button class="info-item" id="button8" onclick="showUserInfo(7)">Neptune</button>
+
+
+        <div class="wrapper">
+          <div class="wrapper-text-holder">
+            <h1 id="title-info" class="wrapper-title">Title</h1>
+            <h2 id="wrapper-text" class="wrapper-text"></h2>
+          </div>
+        </div>
+      </ul>
+    
+  </body>
 </html>
