@@ -4,7 +4,8 @@
 body {
     padding: 0;
     outline: none;
-    background-color: #08090A;
+    /* New deep space background gradient */
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
     --mercurySpeed: 2s;
     --venusSpeed: 5.1428s;
     --earthSpeed: 8.348s;
@@ -17,24 +18,64 @@ body {
     --orbit: rgba(255, 255, 255, 0.5);
     overflow: hidden;
     border: none;
+    height: 100vh;
 }
 
-.background-image {
+/* === New Animated Starfield Styles === */
+#stars-container {
     position: fixed;
-    margin-top: -2%;
-    margin-left: -2%;
-    height: 150vh;
-    z-index: -200;
-    opacity: 0.3;
-    filter: contrast(2);
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-    -ms-user-select: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
 }
+
+@keyframes animateStars {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        /* Move the star canvas up to create a scrolling effect */
+        transform: translateY(-2000px);
+    }
+}
+
+#stars1, #stars2, #stars3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* Height must be taller than the viewport for the animation to work seamlessly */
+    height: 2000px;
+    background-repeat: repeat;
+    background-size: cover;
+}
+
+/* Layer 1: Small, dense, and distant stars (slowest animation) */
+#stars1 {
+    background-image: radial-gradient(1px 1px at 15% 25%, white, transparent), radial-gradient(1px 1px at 50% 10%, white, transparent), radial-gradient(1px 1px at 89% 5%, white, transparent), radial-gradient(1px 1px at 34% 39%, white, transparent), radial-gradient(1px 1px at 55% 50%, white, transparent), radial-gradient(1px 1px at 63% 68%, white, transparent), radial-gradient(1px 1px at 10% 90%, white, transparent), radial-gradient(1px 1px at 45% 95%, white, transparent), radial-gradient(1px 1px at 80% 85%, white, transparent), radial-gradient(1px 1px at 22% 78%, white, transparent), radial-gradient(1px 1px at 73% 60%, white, transparent), radial-gradient(1px 1px at 95% 40%, white, transparent), radial-gradient(1px 1px at 5% 20%, white, transparent), radial-gradient(1px 1px at 30% 5%, white, transparent), radial-gradient(1px 1px at 70% 15%, white, transparent);
+    animation: animateStars 150s linear infinite;
+}
+
+/* Layer 2: Medium-sized stars (medium speed animation) */
+#stars2 {
+    background-image: radial-gradient(2px 2px at 10% 85%, white, transparent), radial-gradient(2px 2px at 70% 30%, white, transparent), radial-gradient(2px 2px at 30% 90%, white, transparent), radial-gradient(2px 2px at 90% 60%, white, transparent), radial-gradient(2px 2px at 50% 5%, white, transparent), radial-gradient(2px 2px at 25% 20%, white, transparent), radial-gradient(2px 2px at 60% 75%, white, transparent);
+    animation: animateStars 100s linear infinite;
+}
+
+/* Layer 3: Large, close stars (fastest animation, creating parallax) */
+#stars3 {
+    background-image: radial-gradient(3px 3px at 80% 50%, white, transparent), radial-gradient(3px 3px at 30% 90%, white, transparent), radial-gradient(3px 3px at 5% 45%, white, transparent), radial-gradient(3px 3px at 95% 15%, white, transparent), radial-gradient(3px 3px at 45% 65%, white, transparent);
+    animation: animateStars 50s linear infinite;
+}
+
+/* === End of New Styles === */
 
 .header-container {
     position: absolute;
+    top: 2vh; /* This line was added */
     display: flex;
     flex-direction: column;
     justify-content: center;
